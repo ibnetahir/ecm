@@ -1,0 +1,140 @@
+﻿@if (Session["username"] != null)
+{
+    string userType = (string)Session["userType"];
+
+    if (userType.Equals("USER"))
+    {
+        Response.Redirect("~/User/dashboard");
+    }
+    else if (userType.Equals("ADMIN"))
+    {
+        
+        @model ecm.Models.user
+    
+        @section title{
+            @ViewBag.Title
+        }
+
+
+        <div class="container main-container headerOffset">
+            <div class="row">
+                <div class="breadcrumbDiv col-lg-12">
+                    <ul class="breadcrumb">
+                        <li><a href="~/pages/index">Home</a></li>
+                        <li><a href="~/admin/dashboard">My Account</a></li>
+                        <li class="active"> My information</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-7">
+                    <h1 class="section-title-inner"><span><i
+                            class="glyphicon glyphicon-user"></i> My personal information </span></h1>
+
+                    <div class="row userInfo">
+                        <div class="col-lg-12">
+                            <h2 class="block-title-2"> Please be sure to update your personal information if it has
+                                changed. </h2>
+
+                            <p class="required"><sup>*</sup> Required field</p>
+                        </div>
+                        <form id="userInfo" action="~/Admin/UpdateUser" method="post">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="form-group required">
+                                    <label for="InputName">First Name <sup>*</sup> </label>
+                                    <input required type="text" class="form-control" id="InputName" name="firstName" value="@Model.FirstName">
+                                </div>
+                                <div class="form-group required">
+                                    <label for="InputLastName">Last Name <sup>*</sup> </label>
+                                    <input required type="text" class="form-control" id="InputLastName" name="lastName" value="@Model.LastName">
+                                </div>
+                                <div class="form-group">
+                                    <label for="InputEmail"> Email </label>
+                                    <input type="email" class="form-control" id="InputEmail" name="email" value="@Model.Email">
+                                </div>
+                                <div class="alert-danger">
+                                    @TempData["error"]
+                                </div>
+                                <div class="alert-success">
+                                    @TempData["success"]
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="form-group required">
+                                    <label for="InputPasswordCurrent"> Password <sup> * </sup> </label>
+                                    <input type="password" value="" name="password" class="form-control"
+                                           id="InputPasswordCurrent">
+                                </div>
+                                <div class="form-group required">
+                                    <label for="InputPasswordnew"> New Password </label>
+                                    <input type="password" name="InputPasswordnew" class="form-control" id="InputPasswordnew">
+                                </div>
+                                <div class="form-group required">
+                                    <label for="InputPasswordnewConfirm"> Confirm Password </label>
+                                    <input type="password" name="PasswordNew" class="form-control"
+                                           id="InputPasswordnewConfirm">
+                                </div>
+                            </div>
+                    
+                            <div class="col-lg-12">
+                                <button type="submit" class="btn   btn-primary"><i class="fa fa-save"></i> &nbsp; Save</button>
+                            </div>
+                        </form>
+                        <div class="col-lg-12 clearfix">
+                            <ul class="pager">
+                                <li class="next pull-left"><a href="~/admin/dashboard"> &larr; Back to Dashboard</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--/row end-->
+
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-5"></div>
+            </div>
+            <!--/row-->
+
+            <div style="clear:both"></div>
+        </div>
+        <!-- /main-container -->
+
+        <div class="gap"></div>
+        
+        @section scripts {
+            <script src="~/content/assets/js/jquery.validate.js"></script>
+
+             <script>
+                 var validator = $("#userInfo").validate({
+                     rules: {
+                         InputPasswordnew: {
+                             required: true,
+                             minlength: 6
+                         },
+
+                         PasswordNew: {
+                             required: true,
+                             minlength: 6,
+                             equalTo: "#InputPasswordnew"
+                         }
+
+                     },
+                     messages: {
+                         InputPasswordnew: {
+                             required: "Provide a password",
+                             minlength: jQuery.validator.format("Enter at least {0} characters")
+                         },
+                         PasswordNew: {
+                             required: "Repeat your password",
+                             minlength: jQuery.validator.format("Enter at least {0} characters"),
+                             equalTo: "Your passwords do not match"
+                         }
+                     },
+                 });
+            </script>
+        }
+  }
+
+}
+else
+{
+    Response.Redirect("~/Pages/Index");
+}

@@ -1,0 +1,132 @@
+﻿
+@if (Session["username"] != null)
+{
+    string userType = (string)Session["userType"];
+
+    if (userType.Equals("USER"))
+    {
+        Response.Redirect("~/User/dashboard");
+    }
+    else if (userType.Equals("ADMIN"))
+    {
+        Response.Redirect("~/Admin/dashboard");
+    }
+}
+else{
+    
+    @model ecm.Models.user
+
+
+    @section title{
+        @ViewBag.Title
+    }
+
+    <div class="container main-container headerOffset">
+
+        <div class="row">
+            <div class="breadcrumbDiv col-lg-12">
+                <ul class="breadcrumb">
+                    <li><a href="~/pages/index">Home</a></li>
+                    <li class="active"> Authentication</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-9 col-md-9 col-sm-7">
+                <h1 class="section-title-inner"><span><i class="fa fa-lock"></i> Authentication</span></h1>
+
+                <div class="row userInfo">
+
+                    <div class="col-xs-12 col-sm-6">
+                        <h2 class="block-title-2"> Create an account </h2>
+
+                         @using (Html.BeginForm("Register", "Auth", FormMethod.Post))
+                         {
+                            <div class="form-group">
+                                @Html.LabelFor(Model => Model.FirstName)
+                            </div>
+                             <div class="form-group">
+                                @Html.EditorFor(Model => Model.FirstName)
+                            </div>
+                             <div style="color:red;">
+                                @Html.ValidationMessageFor(Model => Model.FirstName)
+                            </div>
+                             
+                             <div class="form-group">
+                                @Html.LabelFor(Model => Model.LastName)
+                            </div>
+                             <div class="form-group">
+                                @Html.EditorFor(Model => Model.LastName)
+                            </div>
+                             <div style="color:red;">
+                                @Html.ValidationMessageFor(Model => Model.LastName)
+                            </div>
+                             
+                            <div class="form-group">
+                                @Html.LabelFor(Model => Model.Email)
+                            </div>
+                             <div class="form-group">
+                                @Html.EditorFor(Model => Model.Email)
+                            </div>
+                             <div style="color:red;">
+                                @Html.ValidationMessageFor(Model => Model.Email)
+                            </div>
+                             
+                            <div class="form-group">
+                                @Html.LabelFor(Model => Model.Password)
+                            </div>
+                             <div class="form-group">
+                                @Html.PasswordFor(Model => Model.Password)
+                            </div>
+                             <div style="color:red;">
+                                @Html.ValidationMessageFor(Model => Model.Password)
+                            </div>
+                             <input type="hidden" name="UserType" value="USER" />
+                             
+                             <div class="alert-danger">
+                                 @TempData["error"]
+                             </div>
+                            <button type="submit" class="btn   btn-primary"><i class="fa fa-user"></i> Create an account
+                            </button>
+                         }
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <h2 class="block-title-2"><span>Already registered?</span></h2>
+
+                        @using (Html.BeginForm("LogIn", "Auth", FormMethod.Post))
+                        {
+                            <div class="form-group">
+                                <label>Email address</label>
+                                <input type="email" class="form-control" name="email" placeholder="Enter email" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" class="form-control" name="password" placeholder="Password" required>
+                            </div>
+                            
+                            <div class="alert-danger">
+                                 @TempData["message"]
+                             </div>
+                            
+                            <button type="submit" class="btn   btn-primary"><i class="fa fa-user"></i> Login
+                            </button>
+                        }
+                    </div>
+                </div>
+                <!--/row end-->
+
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-sm-5"></div>
+        </div>
+        <!--/row-->
+
+        <div style="clear:both"></div>
+    </div>
+    <!-- /wrapper -->
+
+    <div class="gap"></div>
+
+}

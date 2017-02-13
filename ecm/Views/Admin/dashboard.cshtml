@@ -1,0 +1,78 @@
+﻿@if (Session["username"] != null)
+{
+    string userType = (string)Session["userType"];
+    
+    if (userType.Equals("USER"))
+    {
+        Response.Redirect("~/User/dashboard");  
+    }
+    else if (userType.Equals("ADMIN"))
+    {
+
+        @section title{
+            @ViewBag.Title
+        }
+
+
+        <div class="container main-container headerOffset">
+            <div class="row">
+                <div class="breadcrumbDiv col-lg-12">
+                    <ul class="breadcrumb">
+                        <li class="active"> Dashboard</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-7">
+                    <h1 class="section-title-inner"><span><i class="fa fa-unlock-alt"></i> Dashboard</span></h1>
+
+                    <div class="row userInfo">
+                        <div class="col-xs-12 col-sm-12">
+                    
+                            <h2 class="block-title-2"><span>Welcome to your account. Here you can manage all of your personal information and orders or items.</span>
+                            </h2>
+                   
+                            <h3>Admin panel</h3>
+                            <ul class="myAccountList row">
+                                <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
+                                    <div class="thumbnail equalheight"><a title="Orders" href="~/admin/orders"><i
+                                            class="fa fa-calendar"></i> Orders </a></div>
+                                </li>
+
+                                <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
+                                    <div class="thumbnail equalheight"><a title="Orders" href="~/admin/items"><i
+                                            class="fa fa-list"></i> Items </a></div>
+                                </li>
+                        
+                                <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
+                                    <div class="thumbnail equalheight"><a title="Personal information"
+                                                                          href="~/admin/userinformation"><i class="fa fa-cog"></i>
+                                        Personal information</a></div>
+                                </li>
+                        
+                            </ul>
+                    
+                    
+                            <div class="clear clearfix"></div>
+                        </div>
+                    </div>
+                    <!--/row end-->
+
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-5"></div>
+            </div>
+            <!--/row-->
+
+            <div style="clear:both"></div>
+        </div>
+        <!-- /wrapper -->
+        <div class="gap"></div>
+    
+    }
+
+}
+else
+{
+    Response.Redirect("~/Pages/Index");
+}
+

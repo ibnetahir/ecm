@@ -1,0 +1,170 @@
+﻿
+@if (Session["username"] != null)
+{
+    string userType = (string)Session["userType"];
+    
+    if (userType.Equals("USER"))
+    {
+        Response.Redirect("~/User/dashboard");  
+    }
+    else if (userType.Equals("ADMIN"))
+    {
+
+        @model List<ecm.Models.item>
+
+        @section title{
+            @ViewBag.Title
+        }
+
+        @section css {
+
+            <!-- styles needed by footable  -->
+            <link href="~/content/assets/css/footable-0.1.css" rel="stylesheet" type="text/css"/>
+            <link href="~/content/assets/css/footable.sortable-0.1.css" rel="stylesheet" type="text/css"/>
+
+        }
+
+        <div class="container main-container headerOffset">
+            <div class="row">
+                <div class="breadcrumbDiv col-lg-12">
+                    <ul class="breadcrumb">
+                        <li><a href="~/pages/index">Home</a></li>
+                        <li><a href="~/admin/dashboard">Dashboard</a></li>
+                        <li class="active"> Items </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-7">
+                    <h1 class="section-title-inner"><span><i class="fa fa-list-alt"></i> Items Management </span></h1>
+
+                    <div>
+                        <div>
+                            <td>
+                                <div class="hidden-sm hidden-xs btn-group">
+                                    <a href="~/Admin/AddNewItem" class="btn btn-primary btn-sm"> <i class="ace-icon fa fa-edit"> </i> Add New Item </a>
+                                </div>
+                            </td>
+                        </div>
+                    </div>
+
+                    <div class="row userInfo">
+                        <div class="col-lg-12">
+                            <h2 class="block-title-2"> Added Items </h2>
+                        </div>
+
+                        <div style="clear:both"></div>
+
+                        <div class="col-xs-12 col-sm-12">
+                        <div class="w100 productFilter clearfix">
+                            <p class="pull-left"> Sort by Catagory</p>
+                            <div class="pull-left ">
+                                <div class="change-order pull-right">
+                                 <form>
+                                    <select class="form-control" name="catagory" id="catagory">
+                                        <option value="Phenyle">Phenyle</option>
+                                        <option value="Toilet Cleaner">Toilet Cleaner</option>
+                                        <option value="Fabric Bleach">Fabric Bleach</option>
+                                        <option value="Feeder">Baby Feeder Cleaner</option>
+                                        <option value="Gel Toilet Cleaner">Gel Toilet Cleaner</option>
+                                        <option value="Glass Cleaner">Glass Cleaner</option>
+                                        <option value="Dish Wash">Dish wash</option>
+                                        <option value="Insect Killer Powder">Insect Killer Powder</option>
+                                        <option value="Insect Killer Liquid">Insect Killer Liquid</option>
+                                        <option value="Naphthaleen Balls">Naphthaleen Balls</option>
+                                        <option value="Liquid Blue">Liquid Blue</option>
+                                    </select>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                            <table class="footable">
+                                <thead>
+                                <tr>
+                                    <th> Product Name </th>
+                                    <th> Description</th>
+                                    <th data-type="numeric"> Price</th>
+                                    <th data-type="numeric"> Quantity</th>
+                                    <th data-type="numeric"> Actions </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                               @item.name
+                                            </td>
+                                            <td>
+                                                @item.description
+                                            </td>
+                                            <td>
+                                               @item.unit_price
+                                            </td>
+                                            <td>
+                                               @item.quantity
+                                            </td>
+                                            <td>
+                                                 <a href="~/Admin/Edit/@item.Id" class="btn btn-primary btn-sm"> <i class="ace-icon fa fa-edit"> </i>Edit</a> 
+                                                 <a href="~/Admin/Delete/@item.Id" class="btn btn-danger btn-sm"> <i class="ace-icon fa fa-trash-o"> </i>Delete</a>
+
+                                            </td>
+                                        </tr>
+                                    }
+                        
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div style="clear:both"></div>
+
+                        <div class="col-lg-12 clearfix">
+                            <ul class="pager">
+                                <li class="next pull-left"><a href="~/admin/dashboard"> &larr; Back to Dashboard</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--/row end-->
+
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-5"></div>
+            </div>
+            <!--/row-->
+
+            <div style="clear:both"></div>
+        </div>
+        <!-- /main-container -->
+
+        <div class="gap"></div>
+
+        @section scripts {
+    
+            <!-- include footable plugin -->
+            <script src="~/content/assets/js/footable.js" type="text/javascript"></script>
+            <script src="~/content/assets/js/footable.sortable.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                $(function () {
+                    $('.footable').footable();
+                });
+            </script>
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $("#catagory").change(function () {
+                        $("form").submit();
+                    });
+
+                });
+            </script>
+
+        }
+    
+    }
+
+}
+else
+{
+    Response.Redirect("~/Pages/Index");
+}

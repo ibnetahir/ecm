@@ -1,0 +1,220 @@
+﻿
+@section title{
+    @ViewBag.Title
+}
+
+@section a{
+    class="active"
+}
+
+<div class="banner">
+    <div class="full-container">
+        <div class="slider-content">
+            <ul id="pager2" class="container">
+            </ul>
+            <!-- prev/next links -->
+
+            <span class="prevControl sliderControl"> <i class="fa fa-angle-left fa-3x "></i></span> <span
+                class="nextControl sliderControl"> <i class="fa fa-angle-right fa-3x "></i></span>
+
+            <div class="slider slider-v1"
+                 data-cycle-swipe=true
+                 data-cycle-prev=".prevControl"
+                 data-cycle-next=".nextControl" data-cycle-loader="wait">
+                
+                <div class="slider-item slider-item-img1">
+                    <div class="sliderInfo">
+                        <div class="container">
+                            <div class="col-lg-12 col-md-12 col-sm-12 sliderTextFull ">
+                                <div class="inner text-center">
+                                    <div class="topAnima animated">
+                                        <h1 class="uppercase xlarge">FREE SHIPPING</h1>
+
+                                        <h3 class="hidden-xs"> Free Standard Shipping on Orders Over 20,000 Rs </h3>
+                                    </div>
+                                    <a class="btn btn-danger btn-lg bottomAnima animated opacity0" href="~/pages/products">SHOP NOW ON KILITE
+                                        <span class="arrowUnicode">►</span></a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="~/images/slider/slider1.jpg" class="img-responsive parallaximg sliderImg" alt="img"></div>
+                <!--/.slider-item-->
+
+                <div class="slider-item slider-item-img2 ">
+                    <div class="sliderInfo">
+                        <div class="container">
+                            <div class="col-lg-12 col-md-12 col-sm-12 sliderTextFull  ">
+                                <div class="inner dark maxwidth500 text-center animated topAnima">
+                                    <div class=" ">
+                                        <h1 class="uppercase xlarge"> Get More Concession</h1>
+
+                                        <h3 class="hidden-xs"> For Your Big Deals </h3>
+                                    </div>
+                                    <a class="btn btn-danger btn-lg"  href="~/pages/products" >SHOP NOW ON KILITE <span
+                                            class="arrowUnicode">►</span></a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="~/images/slider/slider3.jpg" class="img-responsive parallaximg sliderImg" alt="img"></div>
+                <!--/.slider-item-->
+                    
+                <div class="slider-item slider-item-img3 ">
+                    <div class="sliderInfo">
+                        <div class="container">
+                            <div class="col-lg-5 col-md-4 col-sm-6 col-xs-8   pull-left sliderText white hidden-xs">
+                                <div class="inner">
+                                    <h1>E Shopping</h1>
+
+                                    <h3 class="price "> Shipping in Short-Time</h3>
+
+                                    <p class="hidden-xs">We Provide Our Respected Customers best Products in just a Short-Time </p>
+                                    <a href="~/pages/products" class="btn btn-primary">SHOP NOW ON KILITE <span class="arrowUnicode">►</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="~/images/slider/slider4.jpg" class="img-responsive parallaximg sliderImg" alt="img"></div>
+                <!--/.slider-item-->
+
+                
+            </div>
+            <!--/.slider slider-v1-->
+        </div>
+        <!--/.slider-content-->
+    </div>
+    <!--/.full-container-->
+</div>
+<!--/.banner style1-->
+
+<div class="container main-container">
+
+    <!-- Main component call to action -->
+
+    <div class="row featuredPostContainer globalPadding style2">
+        <h3 class="section-title style2 text-center"><span>NEW ARRIVALS</span></h3>
+
+        <div id="productslider" class="owl-carousel owl-theme">
+            
+             @foreach (var item in Model)
+                {
+                    <div class="item">
+                        <div class="product">
+                            <div class="image">
+                            
+                                <a href="~/pages/productdetails/@item.Id"><img src="~/images/@item.photo1" alt="img"
+                                                                    class="img-responsive"></a>
+                            </div>
+                            <div class="description">
+                                <h4><a href="~/pages/productdetails/@item.Id">@item.name</a></h4>
+
+                                <div class="grid-description">
+                                    <p>@item.description</p>
+                                </div>
+                                <div class="list-description">
+                                    <p> @item.description </p>
+                                </div>
+                            </div>
+                            <div class="price"><span>$@item.unit_price</span></div>
+                            <div class="action-control"><a class="btn btn-primary" href="~/Pages/productdetails/@item.Id" > <span class="add2cart"><i
+                                    class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
+                        </div>
+                    </div>
+                }
+        </div>
+        <!--/.productslider-->
+
+    </div>
+    <!--/.featuredPostContainer-->
+</div>
+<!-- /main container -->
+
+<div class="parallax-section parallax-image-1">
+    <div class="container">
+        <div class="row ">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="parallax-content clearfix">
+                    <h1 class="parallaxPrce"> 20,000 Rs </h1>
+
+                    <h2 class="uppercase">FREE SHIPPING! Place Your Order Now</h2>
+
+                    <h3> Recieve Your Order in Short-Time </h3>
+
+                    <div style="clear:both"></div>
+                    <a class="btn btn-discover " href="~/pages/products"> <i class="fa fa-shopping-cart"></i> SHOP NOW </a></div>
+            </div>
+        </div>
+        <!--/.row-->
+    </div>
+    <!--/.container-->
+</div>
+<!--/.parallax-image-1-->
+
+<div class="container">
+
+
+
+    <div class="width100 section-block">
+        <h3 class="section-title"><span> BRAND</span> <a id="nextBrand" class="link pull-right carousel-nav"> <i
+                class="fa fa-angle-right"></i></a> <a id="prevBrand" class="link pull-right carousel-nav"> <i
+                class="fa fa-angle-left"></i> </a></h3>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="no-margin brand-carousel owl-carousel owl-theme">
+                    <li><a><img src="~/images/brand/1.gif" alt="img"></a></li>
+                    <li><img src="~/images/brand/2.png" alt="img"></li>
+                    <li><img src="~/images/brand/3.png" alt="img"></li>
+                    <li><img src="~/images/brand/4.png" alt="img"></li>
+                    <li><img src="~/images/brand/5.png" alt="img"></li>
+                    <li><img src="~/images/brand/6.png" alt="img"></li>
+                    <li><img src="~/images/brand/7.png" alt="img"></li>
+                    <li><img src="~/images/brand/8.png" alt="img"></li>
+                    <li><img src="~/images/brand/1.gif" alt="img"></li>
+                    <li><img src="~/images/brand/2.png" alt="img"></li>
+                    <li><img src="~/images/brand/3.png" alt="img"></li>
+                    <li><img src="~/images/brand/4.png" alt="img"></li>
+                    <li><img src="~/images/brand/5.png" alt="img"></li>
+                    <li><img src="~/images/brand/6.png" alt="img"></li>
+                    <li><img src="~/images/brand/7.png" alt="img"></li>
+                    <li><img src="~/images/brand/8.png" alt="img"></li>
+                </ul>
+            </div>
+        </div>
+        <!--/.row-->
+    </div>
+    <!--/.section-block-->
+
+</div>
+<!--main-container-->
+
+<div class="parallax-section parallax-image-2">
+    <div class="w100 parallax-section-overley">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="parallax-content clearfix">
+                        <h1 class="xlarge"> Trusted Producer,Seller  </h1>
+                        <h5 class="parallaxSubtitle"> We are the Best Producers,Sellers </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/.parallax-section-->
+
+<!-- Product Details Modal  -->
+<!-- Modal -->
+<div class="modal fade" id="productSetailsModalAjax" tabindex="-1" role="dialog"
+     aria-labelledby="productSetailsModalAjaxLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- End Modal -->
+
+

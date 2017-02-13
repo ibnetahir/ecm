@@ -1,0 +1,192 @@
+﻿@if (Session["username"] != null)
+{
+    string userType = (string)Session["userType"];
+    
+    if (userType.Equals("USER"))
+    {
+        Response.Redirect("~/User/dashboard");  
+    }
+    else if (userType.Equals("ADMIN"))
+    {
+
+        @model ecm.Models.item
+
+        @section title{
+            @ViewBag.Title
+        }
+
+
+
+        <div class="container main-container headerOffset">
+            <div class="row">
+                <div class="breadcrumbDiv col-lg-12">
+                    <ul class="breadcrumb">
+                        <li><a href="~/pages/index">Home</a></li>
+                        <li><a href="~/admin/dashboard">Dashboard</a></li>
+                        <li class="active"> Edit Item</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                @using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { enctype="multipart/form-data" }))
+                {
+                    <div class="col-lg-6 col-md-6 col-sm-4">
+                        <h2>Edit Item</h2>
+                            <div class="form-group">
+                                <label>Select Catagory</label>
+                                <select class="form-control" name="catagory">
+                                    <option value="Phenyle">Phenyle</option>
+                                    <option value="Toilet Cleaner">Toilet Cleaner</option>
+                                    <option value="Fabric Bleach">Fabric Bleach</option>
+                                    <option value="Feeder">Baby Feeder Cleaner</option>
+                                    <option value="Gel Toilet Cleaner">Gel Toilet Cleaner</option>
+                                    <option value="Glass Cleaner">Glass Cleaner</option>
+                                    <option value="Dish Wash">Dish wash</option>
+                                    <option value="Insect Killer Powder">Insect Killer Powder</option>
+                                    <option value="Insect Killer Liquid">Insect Killer Liquid</option>
+                                    <option value="Naphthaleen Balls">Naphthaleen Balls</option>
+                                    <option value="Liquid Blue">Liquid Blue</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Product Name")
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.name, new { @size="20px" })
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Description")
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.description)
+                            </div>
+                            @Html.Label("Unit Price")
+                            <div class="form-group input-group col-lg-4" >
+                                 @Html.TextBoxFor(model => model.unit_price)
+                            </div>
+                            <div class="form-group input-group col-lg-4" >
+                                @Html.Label("Quantity")
+                               </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.quantity)
+                            </div>
+                            <div class="alert-danger">
+                                    @TempData["error"]
+                                </div>
+                            <button type="submit" class="btn btn-primary">Update Item</button>
+            
+                        <!--/row end-->
+                    </div>
+                
+            
+                    <div class="col-lg-6 col-md-6 col-sm-4">
+                        <h2>Upload Images</h2>
+                        <div class="form-group input-group col-lg-4 photo_1" >
+
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                              <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                                  <img src="~/images/@Model.photo1"/>
+                              </div>
+                              <div>
+                                <span class="btn btn-success btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>
+                                    <input type="file" name="photo" class="photo-input-1"></span>
+                                <a href="#" class="btn btn-danger fileinput-exists remove-btn" data-dismiss="fileinput">Remove</a>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="form-group input-group col-lg-4 photo_2" >
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                              <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                                  <img src="~/images/@Model.photo2"/>
+                              </div>
+                              <div>
+                                <span class="btn btn-success btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>
+                                    <input type="file" name="photo" class="photo-input-2"></span>
+                                <a href="#" class="btn btn-danger fileinput-exists remove-btn" data-dismiss="fileinput">Remove</a>
+                              </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group input-group col-lg-4 photo_3" >
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                              <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                                  <img src="~/images/@Model.photo3" />
+                              </div>
+                              <div>
+                                <span class="btn btn-success btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>
+                                    <input type="file" name="photo" class="photo-input-3"></span>
+                                <a href="#" class="btn btn-danger fileinput-exists remove-btn" data-dismiss="fileinput">Remove</a>
+                              </div>
+                            </div>
+
+                        </div>
+                    </div>
+            
+                    <input type="hidden" name="photo_1_change" value="0">   
+                    <input type="hidden" name="photo_2_change" value="0">
+                    <input type="hidden" name="photo_3_change" value="0">
+                }
+            </div>
+            <!--/row-->
+
+            <div style="clear:both"></div>
+            <div class="col-lg-12 clearfix">
+                <ul class="pager">
+                    <li class="next pull-left"><a href="~/admin/items"> &larr; Back to Items Management</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /wrapper -->
+        <div class="gap"></div>
+
+        @section scripts {
+        <script>
+
+            $("select option").each(function () {
+                if ($(this).text() == "@Model.catagory" )
+                    $(this).attr("selected", "selected");
+            });
+
+            $('.photo_1 .remove-btn').click(function () {
+                $("input[name=photo_1_change]").val(1);
+            })
+
+            $('.photo_2 .remove-btn').click(function () {
+                $("input[name=photo_2_change]").val(1);
+            })
+
+            $('.photo_3 .remove-btn').click(function () {
+                $("input[name=photo_3_change]").val(1);
+            })
+
+            $(".photo-input-1").change(function () {
+
+                $("input[name=photo_1_change]").val(1);
+
+            })
+
+
+            $(".photo-input-2").change(function () {
+
+                $("input[name=photo_2_change]").val(1);
+
+            })
+
+
+            $(".photo-input-3").change(function () {
+
+                $("input[name=photo_3_change]").val(1);
+
+            })
+
+        </script>
+    
+        }
+
+    }
+                           
+}
+else
+{
+    Response.Redirect("~/Pages/Index");  
+}
